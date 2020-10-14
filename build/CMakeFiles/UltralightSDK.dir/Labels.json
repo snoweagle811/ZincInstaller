@@ -1,0 +1,43 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/Users/sherl/Documents/Proj/C++/ZincInstaller/build/CMakeFiles/UltralightSDK"
+		},
+		{
+			"file" : "C:/Users/sherl/Documents/Proj/C++/ZincInstaller/build/CMakeFiles/cfce253209ad073ca08854efacef12cd/UltralightSDK.rule"
+		},
+		{
+			"file" : "C:/Users/sherl/Documents/Proj/C++/ZincInstaller/build/CMakeFiles/fb342a64f793b7877ad2e5f091f154e2/UltralightSDK-complete.rule"
+		},
+		{
+			"file" : "C:/Users/sherl/Documents/Proj/C++/ZincInstaller/build/CMakeFiles/67f57044f34c533ac05d75f38885a6e2/UltralightSDK-install.rule"
+		},
+		{
+			"file" : "C:/Users/sherl/Documents/Proj/C++/ZincInstaller/build/CMakeFiles/67f57044f34c533ac05d75f38885a6e2/UltralightSDK-mkdir.rule"
+		},
+		{
+			"file" : "C:/Users/sherl/Documents/Proj/C++/ZincInstaller/build/CMakeFiles/67f57044f34c533ac05d75f38885a6e2/UltralightSDK-download.rule"
+		},
+		{
+			"file" : "C:/Users/sherl/Documents/Proj/C++/ZincInstaller/build/CMakeFiles/67f57044f34c533ac05d75f38885a6e2/UltralightSDK-update.rule"
+		},
+		{
+			"file" : "C:/Users/sherl/Documents/Proj/C++/ZincInstaller/build/CMakeFiles/67f57044f34c533ac05d75f38885a6e2/UltralightSDK-patch.rule"
+		},
+		{
+			"file" : "C:/Users/sherl/Documents/Proj/C++/ZincInstaller/build/CMakeFiles/67f57044f34c533ac05d75f38885a6e2/UltralightSDK-configure.rule"
+		},
+		{
+			"file" : "C:/Users/sherl/Documents/Proj/C++/ZincInstaller/build/CMakeFiles/67f57044f34c533ac05d75f38885a6e2/UltralightSDK-build.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"UltralightSDK"
+		],
+		"name" : "UltralightSDK"
+	}
+}

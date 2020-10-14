@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\sherl\Documents\Proj\C++\ZincInstaller\lib7zip\test\stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\sherl\Documents\Proj\C++\ZincInstaller\lib7zip\test\Test7ZipMulti.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\sherl\Documents\Proj\C++\ZincInstaller\lib7zip\test\stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\sherl\Documents\Proj\C++\ZincInstaller\lib7zip\test\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{17BA0C3A-2FEB-31E8-93A1-3CD10D72BCEA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{C18C0274-E3E7-3DC7-BD93-244A9A2A0787}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

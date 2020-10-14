@@ -1,0 +1,148 @@
+^C:\USERS\SHERL\DOCUMENTS\PROJ\C++\ZINCINSTALLER\BUILD\CMAKEFILES\67F57044F34C533AC05D75F38885A6E2\ULTRALIGHTSDK-MKDIR.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/sherl/Documents/Proj/C++/ZincInstaller/build/SDK/
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/sherl/Documents/Proj/C++/ZincInstaller/build/SDK/
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/sherl/Documents/Proj/C++/ZincInstaller/build/UltralightSDK-prefix
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/sherl/Documents/Proj/C++/ZincInstaller/build/UltralightSDK-prefix/tmp
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/sherl/Documents/Proj/C++/ZincInstaller/build/UltralightSDK-prefix/src/UltralightSDK-stamp/Release
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/sherl/Documents/Proj/C++/ZincInstaller/build/UltralightSDK-prefix/src
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/sherl/Documents/Proj/C++/ZincInstaller/build/UltralightSDK-prefix/src/UltralightSDK-stamp
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/sherl/Documents/Proj/C++/ZincInstaller/build/UltralightSDK-prefix/src/UltralightSDK-stamp/Release/UltralightSDK-mkdir
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\SHERL\DOCUMENTS\PROJ\C++\ZINCINSTALLER\BUILD\CMAKEFILES\67F57044F34C533AC05D75F38885A6E2\ULTRALIGHTSDK-DOWNLOAD.RULE
+setlocal
+cd C:\Users\sherl\Documents\Proj\C++\ZincInstaller\build
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/sherl/Documents/Proj/C++/ZincInstaller/build/UltralightSDK-prefix/src/UltralightSDK-stamp/download-UltralightSDK.cmake
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/sherl/Documents/Proj/C++/ZincInstaller/build/UltralightSDK-prefix/src/UltralightSDK-stamp/verify-UltralightSDK.cmake
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/sherl/Documents/Proj/C++/ZincInstaller/build/UltralightSDK-prefix/src/UltralightSDK-stamp/extract-UltralightSDK.cmake
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/sherl/Documents/Proj/C++/ZincInstaller/build/UltralightSDK-prefix/src/UltralightSDK-stamp/Release/UltralightSDK-download
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\SHERL\DOCUMENTS\PROJ\C++\ZINCINSTALLER\BUILD\CMAKEFILES\67F57044F34C533AC05D75F38885A6E2\ULTRALIGHTSDK-UPDATE.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/sherl/Documents/Proj/C++/ZincInstaller/build/UltralightSDK-prefix/src/UltralightSDK-stamp/Release/UltralightSDK-update
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\SHERL\DOCUMENTS\PROJ\C++\ZINCINSTALLER\BUILD\CMAKEFILES\67F57044F34C533AC05D75F38885A6E2\ULTRALIGHTSDK-PATCH.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/sherl/Documents/Proj/C++/ZincInstaller/build/UltralightSDK-prefix/src/UltralightSDK-stamp/Release/UltralightSDK-patch
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\SHERL\DOCUMENTS\PROJ\C++\ZINCINSTALLER\BUILD\CMAKEFILES\67F57044F34C533AC05D75F38885A6E2\ULTRALIGHTSDK-CONFIGURE.RULE
+setlocal
+cd C:\Users\sherl\Documents\Proj\C++\ZincInstaller\build\SDK
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/sherl/Documents/Proj/C++/ZincInstaller/build/UltralightSDK-prefix/src/UltralightSDK-stamp/Release/UltralightSDK-configure
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\SHERL\DOCUMENTS\PROJ\C++\ZINCINSTALLER\BUILD\CMAKEFILES\67F57044F34C533AC05D75F38885A6E2\ULTRALIGHTSDK-BUILD.RULE
+setlocal
+cd C:\Users\sherl\Documents\Proj\C++\ZincInstaller\build\SDK
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/sherl/Documents/Proj/C++/ZincInstaller/build/UltralightSDK-prefix/src/UltralightSDK-stamp/Release/UltralightSDK-build
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\SHERL\DOCUMENTS\PROJ\C++\ZINCINSTALLER\BUILD\CMAKEFILES\67F57044F34C533AC05D75F38885A6E2\ULTRALIGHTSDK-INSTALL.RULE
+setlocal
+cd C:\Users\sherl\Documents\Proj\C++\ZincInstaller\build\SDK
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/sherl/Documents/Proj/C++/ZincInstaller/build/UltralightSDK-prefix/src/UltralightSDK-stamp/Release/UltralightSDK-install
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\SHERL\DOCUMENTS\PROJ\C++\ZINCINSTALLER\BUILD\CMAKEFILES\FB342A64F793B7877AD2E5F091F154E2\ULTRALIGHTSDK-COMPLETE.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/sherl/Documents/Proj/C++/ZincInstaller/build/CMakeFiles/Release
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/sherl/Documents/Proj/C++/ZincInstaller/build/CMakeFiles/Release/UltralightSDK-complete
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/sherl/Documents/Proj/C++/ZincInstaller/build/UltralightSDK-prefix/src/UltralightSDK-stamp/Release/UltralightSDK-done
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\SHERL\DOCUMENTS\PROJ\C++\ZINCINSTALLER\BUILD\CMAKEFILES\CFCE253209AD073CA08854EFACEF12CD\ULTRALIGHTSDK.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\SHERL\DOCUMENTS\PROJ\C++\ZINCINSTALLER\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/sherl/Documents/Proj/C++/ZincInstaller -BC:/Users/sherl/Documents/Proj/C++/ZincInstaller/build --check-stamp-file C:/Users/sherl/Documents/Proj/C++/ZincInstaller/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

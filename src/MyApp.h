@@ -1,5 +1,8 @@
-#pragma once
 #include <AppCore/AppCore.h>
+#include <Windows.h>
+#include <iostream>
+
+#pragma once
 
 using namespace ultralight;
 
@@ -43,8 +46,11 @@ public:
   virtual void OnChangeTitle(ultralight::View* caller,
     const String& title) override;
 
+  JSValue Message(const JSObject thisObj, const JSArgs& args);
+
 protected:
   RefPtr<App> app_;
   RefPtr<Window> window_;
-  RefPtr<Overlay> overlay_;
 };
+void CenterWindow();
+LRESULT CALLBACK HookCallback(int nCode, WPARAM wParam, LPARAM lParam);

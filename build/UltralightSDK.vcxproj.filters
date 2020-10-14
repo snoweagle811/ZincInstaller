@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\sherl\Documents\Proj\C++\ZincInstaller\build\CMakeFiles\67f57044f34c533ac05d75f38885a6e2\UltralightSDK-mkdir.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\sherl\Documents\Proj\C++\ZincInstaller\build\CMakeFiles\67f57044f34c533ac05d75f38885a6e2\UltralightSDK-download.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\sherl\Documents\Proj\C++\ZincInstaller\build\CMakeFiles\67f57044f34c533ac05d75f38885a6e2\UltralightSDK-update.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\sherl\Documents\Proj\C++\ZincInstaller\build\CMakeFiles\67f57044f34c533ac05d75f38885a6e2\UltralightSDK-patch.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\sherl\Documents\Proj\C++\ZincInstaller\build\CMakeFiles\67f57044f34c533ac05d75f38885a6e2\UltralightSDK-configure.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\sherl\Documents\Proj\C++\ZincInstaller\build\CMakeFiles\67f57044f34c533ac05d75f38885a6e2\UltralightSDK-build.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\sherl\Documents\Proj\C++\ZincInstaller\build\CMakeFiles\67f57044f34c533ac05d75f38885a6e2\UltralightSDK-install.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\sherl\Documents\Proj\C++\ZincInstaller\build\CMakeFiles\fb342a64f793b7877ad2e5f091f154e2\UltralightSDK-complete.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\sherl\Documents\Proj\C++\ZincInstaller\build\CMakeFiles\cfce253209ad073ca08854efacef12cd\UltralightSDK.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\sherl\Documents\Proj\C++\ZincInstaller\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\sherl\Documents\Proj\C++\ZincInstaller\build\CMakeFiles\UltralightSDK" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{D5E6CE06-5001-3B79-BFFB-3031A63235D9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

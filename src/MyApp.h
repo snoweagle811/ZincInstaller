@@ -52,5 +52,7 @@ protected:
   RefPtr<App> app_;
   RefPtr<Window> window_;
 };
+const char* GetExePath();
+void DownloadProcess(const char* url);
 void CenterWindow();
 LRESULT CALLBACK HookCallback(int nCode, WPARAM wParam, LPARAM lParam);

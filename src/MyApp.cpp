@@ -1,4 +1,4 @@
-#pragma comment(linker,"\"/manifestdependency:type='win32' \
+#pragma comment(linker, "\"/manifestdependency:type='win32' \
 name='Microsoft.Windows.Common-Controls' version='6.0.0.0' \
 processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
 
@@ -9,7 +9,8 @@ processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
 #include <WinInet.h>
 #include <CommCtrl.h>
 #include <filesystem>
-#include <7zpp/7zpp.h>
+#include <thread>
+#include <future>
 
 int WINDOW_WIDTH = 1280;
 int WINDOW_HEIGHT = 720;
@@ -17,7 +18,8 @@ int WINDOW_HEIGHT = 720;
 HWND window = nullptr;
 RefPtr<Overlay> overlay_;
 
-MyApp::MyApp() {
+MyApp::MyApp()
+{
 
   ultralight::Config config;
   ultralight::Settings settings;
@@ -37,12 +39,12 @@ MyApp::MyApp() {
   /// kWindowFlags_Resizable.
   ///
   window_ = Window::Create(app_->main_monitor(), WINDOW_WIDTH, WINDOW_HEIGHT,
-    false, kWindowFlags_Titled | kWindowFlags_Resizable | kWindowFlags_Maximizable);
+                           false, kWindowFlags_Titled | kWindowFlags_Resizable | kWindowFlags_Maximizable);
 
   window = reinterpret_cast<HWND>(window_->native_handle());
 
   ShowWindow(window, SW_HIDE);
-  
+
   (*window_).SetTitle("Loading Zinc Installer...");
 
   ///
@@ -93,14 +95,17 @@ MyApp::MyApp() {
   overlay_->view()->set_view_listener(this);
 }
 
-MyApp::~MyApp() {
+MyApp::~MyApp()
+{
 }
 
-void MyApp::Run() {
+void MyApp::Run()
+{
   app_->Run();
 }
 
-void MyApp::OnUpdate() {
+void MyApp::OnUpdate()
+{
   ///
   /// This is called repeatedly from the application's update loop.
   ///
@@ -108,10 +113,12 @@ void MyApp::OnUpdate() {
   ///
 }
 
-void MyApp::OnClose() {
+void MyApp::OnClose()
+{
 }
 
-void MyApp::OnResize(uint32_t width, uint32_t height) {
+void MyApp::OnResize(uint32_t width, uint32_t height)
+{
   ///
   /// This is called whenever the window changes size (values in pixels).
   ///
@@ -120,10 +127,11 @@ void MyApp::OnResize(uint32_t width, uint32_t height) {
   overlay_->Resize(width, height);
 }
 
-void MyApp::OnFinishLoading(ultralight::View* caller,
+void MyApp::OnFinishLoading(ultralight::View *caller,
                             uint64_t frame_id,
                             bool is_main_frame,
-                            const String& url) {
+                            const String &url)
+{
   ///
   /// This is called when a frame finishes loading on the page.
   ///
@@ -132,10 +140,11 @@ void MyApp::OnFinishLoading(ultralight::View* caller,
   CenterWindow();
 }
 
-void MyApp::OnDOMReady(ultralight::View* caller,
+void MyApp::OnDOMReady(ultralight::View *caller,
                        uint64_t frame_id,
                        bool is_main_frame,
-                       const String& url) {
+                       const String &url)
+{
   ///
   /// This is called when a frame's DOM has finished loading on the page.
   ///
@@ -148,11 +157,11 @@ void MyApp::OnDOMReady(ultralight::View* caller,
   JSObject global = JSGlobalObject();
 
   global["SendMessage"] = BindJSCallback(&MyApp::Message);
-
 }
 
-void MyApp::OnChangeCursor(ultralight::View* caller,
-                           Cursor cursor) {
+void MyApp::OnChangeCursor(ultralight::View *caller,
+                           Cursor cursor)
+{
   ///
   /// This is called whenever the page requests to change the cursor.
   ///
@@ -161,8 +170,9 @@ void MyApp::OnChangeCursor(ultralight::View* caller,
   window_->SetCursor(cursor);
 }
 
-void MyApp::OnChangeTitle(ultralight::View* caller,
-                          const String& title) {
+void MyApp::OnChangeTitle(ultralight::View *caller,
+                          const String &title)
+{
   ///
   /// This is called whenever the page requests to change the title.
   ///
@@ -171,52 +181,58 @@ void MyApp::OnChangeTitle(ultralight::View* caller,
   window_->SetTitle(title.utf8().data());
 }
 
-JSValue MyApp::Message(const JSObject thisObj, const JSArgs& args) {
+JSValue MyApp::Message(const JSObject thisObj, const JSArgs &args)
+{
   JSString str = args[0];
   auto length = JSStringGetLength(str);
   auto buffer = new char[length];
   JSStringGetUTF8CString(str, buffer, length);
 
-  const char* url = buffer;
-  std::string filePath = std::filesystem::temp_directory_path().string() + "Zinc.zip";
+  const char *url = buffer;
 
-  std::cout << "Downloading File..." << std::endl;
+  std::thread downloadThread(DownloadProcess, url);
 
-  DeleteUrlCacheEntry(url);
-
-  HRESULT hr = URLDownloadToFile(nullptr, url, filePath.c_str(), 0, nullptr);
-
-  if (SUCCEEDED(hr)) {
-    std::cout << "Downloaded OK" << std::endl;
-
-    SevenZip::SevenZipLibrary lib;
-    lib.Load();
-    
-    SevenZip::SevenZipExtractor extractor(lib, SevenZip::TString(std::wstring(filePath.begin(), filePath.end())));
-    extractor.SetCompressionFormat(SevenZip::CompressionFormat::Zip);
-    SevenZip::TString path = filePath;
-    SevenZip::TString destPath = filePath;
-    std::string destPath = std::filesystem::temp_directory_path().string() + "Zinc";
-    extractor.ExtractArchive(SevenZip::TString(std::wstring(destPath.begin(), destPath.end())), nullptr);
-  } else {
-    std::cout << "Download Failed" << std::endl;
-  }
+  downloadThread.detach();
 
   return JSValue(NULL);
 }
 
- void CenterWindow() {
-   RECT rect;
+void DownloadProcess(const char* url) {
+  HRESULT hr;
+  std::string filePath = std::filesystem::temp_directory_path().string() + "Zinc.zip";
+
+  DeleteUrlCacheEntry(url);
+
+  hr = URLDownloadToFile(nullptr, url, filePath.c_str(), 0, nullptr);
+  if (SUCCEEDED(hr))
+  {
+
+    MessageBox(window, "Download Succeeded", "DEBUG", MB_OK | MB_ICONINFORMATION);
+  }
+
+  return;
+}
+
+const char* GetExePath() {
+  char* pathBuffer = "";
+  GetModuleFileName(NULL, pathBuffer, MAX_PATH);
+
+  return (const char*)pathBuffer;
+}
+
+void CenterWindow()
+{
+  RECT rect;
   GetWindowRect(window, &rect);
   LPRECT prc = &rect;
 
   // Get main monitor
-  HMONITOR hMonitor = MonitorFromPoint({ 1,1 }, MONITOR_DEFAULTTONEAREST);
+  HMONITOR hMonitor = MonitorFromPoint({1, 1}, MONITOR_DEFAULTTONEAREST);
 
   MONITORINFO mi;
-  RECT        rc;
-  int         w = prc->right - prc->left;
-  int         h = prc->bottom - prc->top;
+  RECT rc;
+  int w = prc->right - prc->left;
+  int h = prc->bottom - prc->top;
 
   mi.cbSize = sizeof(mi);
   GetMonitorInfo(hMonitor, &mi);
@@ -229,4 +245,4 @@ JSValue MyApp::Message(const JSObject thisObj, const JSArgs& args) {
   prc->bottom = prc->top + h;
 
   SetWindowPos(window, NULL, rect.left, rect.top, 0, 0, SWP_NOSIZE | SWP_NOZORDER | SWP_NOACTIVATE);
- }
+}

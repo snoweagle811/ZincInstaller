@@ -15,8 +15,6 @@ else()
 endif()
 
 include(cmake/App.cmake)
-add_subdirectory(7zip-cpp)
-include_directories(7zip-cpp)
 
 set(SOURCES "src/MyApp.h"
             "src/MyApp.cpp"
@@ -34,4 +32,4 @@ endif()
 
 add_app("${SOURCES}")
 
-target_link_libraries(${PROJECT_NAME} 7zpp)
+file(COPY 7zip DESTINATION "./Release/")

@@ -1,4 +1,5 @@
 const installBtn = document.getElementById('installbtn')
+const title = document.getElementById('title')
 
 installBtn.addEventListener('click', ()=>{
     getJSON('https://api.github.com/repos/lockieluke/Zinc/tags', function (status, data) {
@@ -8,6 +9,9 @@ installBtn.addEventListener('click', ()=>{
             const dataLatest = data[dataLength - 1]
             const vername = dataLatest.name
             SendMessage('https://github.com/lockieluke/Zinc/releases/download/' + vername.toString() + '/Zinc-win32-x64.7z')
+        } else {
+            installBtn.innerText = "Download unavailable"
+            installBtn.style.pointerEvents = 'none'
         }
     });
 })
@@ -22,3 +26,7 @@ const getJSON = (url, callback) => {
     };
     xhr.send();
 };
+
+function DownloadComplete() {
+    title.innerText = "Download Completed"
+}

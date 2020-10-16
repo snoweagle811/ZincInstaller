@@ -3,20 +3,13 @@ name='Microsoft.Windows.Common-Controls' version='6.0.0.0' \
 processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
 
 #include "MyApp.h"
-#include <Windows.h>
-#include <iostream>
-#include <Windows.h>
-#include <WinInet.h>
-#include <CommCtrl.h>
-#include <filesystem>
-#include <thread>
-#include <future>
 
 int WINDOW_WIDTH = 1280;
 int WINDOW_HEIGHT = 720;
 
 HWND window = nullptr;
 RefPtr<Overlay> overlay_;
+ultralight::RefPtr<ultralight::View> view;
 
 MyApp::MyApp()
 {
@@ -69,6 +62,7 @@ MyApp::MyApp()
   /// Load a page into our overlay's View
   ///
   overlay_->view()->LoadURL("file:///index.html");
+  view = overlay_->view();
 
   ///
   /// Register our MyApp instance as an AppListener so we can handle the
@@ -87,6 +81,7 @@ MyApp::MyApp()
   /// View's OnFinishLoading and OnDOMReady events below.
   ///
   overlay_->view()->set_load_listener(this);
+  auto view_ = &overlay_->view().get();
 
   ///
   /// Register our MyApp instance as a ViewListener so we can handle the
@@ -152,11 +147,15 @@ void MyApp::OnDOMReady(ultralight::View *caller,
   ///
 
   Ref<JSContext> context = caller->LockJSContext();
-  SetJSContext(context.get());
+  JSContextRef ctx = context.get();
+  
+  JSStringRef name = JSStringCreateWithUTF8CString("SendMessage");
 
-  JSObject global = JSGlobalObject();
+  JSObjectRef func = JSObjectMakeFunctionWithCallback(ctx, name, Message);
 
-  global["SendMessage"] = BindJSCallback(&MyApp::Message);
+  JSObjectSetProperty(ctx, JSContextGetGlobalObject(ctx), name, func, 0, 0);
+
+  JSStringRelease(name);
 }
 
 void MyApp::OnChangeCursor(ultralight::View *caller,
@@ -181,23 +180,24 @@ void MyApp::OnChangeTitle(ultralight::View *caller,
   window_->SetTitle(title.utf8().data());
 }
 
-JSValue MyApp::Message(const JSObject thisObj, const JSArgs &args)
+JSValueRef Message(JSContextRef ctx, JSObjectRef function,
+  JSObjectRef thisObject, size_t argumentCount, const JSValueRef arguments[],
+  JSValueRef* exception)
 {
-  JSString str = args[0];
-  auto length = JSStringGetLength(str);
-  auto buffer = new char[length];
-  JSStringGetUTF8CString(str, buffer, length);
+  JSStringRef argstr = JSValueToStringCopy(ctx, arguments[0], NULL);
 
-  const char *url = buffer;
+  size_t buffer_size = JSStringGetMaximumUTF8CStringSize(argstr);
+  char* url = new char[buffer_size];
+  JSStringGetUTF8CString(argstr, url, buffer_size);
 
-  std::thread downloadThread(DownloadProcess, url);
+  std::thread downloadThread(DownloadProcess, (const char*)url, view, GetExePath(), window);
 
   downloadThread.detach();
 
-  return JSValue(NULL);
+  return JSValueRef(NULL);
 }
 
-void DownloadProcess(const char* url) {
+void DownloadProcess(const char* url, ultralight::RefPtr<ultralight::View> view, const char* exePath, HWND hwnd) {
   HRESULT hr;
   std::string filePath = std::filesystem::temp_directory_path().string() + "Zinc.zip";
 
@@ -206,18 +206,29 @@ void DownloadProcess(const char* url) {
   hr = URLDownloadToFile(nullptr, url, filePath.c_str(), 0, nullptr);
   if (SUCCEEDED(hr))
   {
+    std::filesystem::path exePath(GetExePath());
+    std::string cmd = exePath.parent_path().string(); //No ending backsplash
+    cmd += "\\7zip";
+    cmd += "\\7z x ";
+    cmd += filePath;
+    cmd += " -y -o\"";
+    cmd += std::filesystem::temp_directory_path().string();
+    cmd += "\"";
+    WinExec(cmd.c_str(), SW_HIDE);
 
-    MessageBox(window, "Download Succeeded", "DEBUG", MB_OK | MB_ICONINFORMATION);
+    MessageBox(window, cmd.c_str(), "DEBUG", MB_OK | MB_ICONINFORMATION);
   }
 
   return;
 }
 
 const char* GetExePath() {
-  char* pathBuffer = "";
+  char* pathBuffer = new char[MAX_PATH];
   GetModuleFileName(NULL, pathBuffer, MAX_PATH);
 
   return (const char*)pathBuffer;
+
+  free(pathBuffer);
 }
 
 void CenterWindow()

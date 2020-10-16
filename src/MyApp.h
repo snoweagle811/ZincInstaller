@@ -1,6 +1,11 @@
 #include <AppCore/AppCore.h>
 #include <Windows.h>
 #include <iostream>
+#include <WinInet.h>
+#include <CommCtrl.h>
+#include <filesystem>
+#include <thread>
+#include <future>
 
 #pragma once
 
@@ -46,13 +51,15 @@ public:
   virtual void OnChangeTitle(ultralight::View* caller,
     const String& title) override;
 
-  JSValue Message(const JSObject thisObj, const JSArgs& args);
-
 protected:
   RefPtr<App> app_;
   RefPtr<Window> window_;
 };
 const char* GetExePath();
-void DownloadProcess(const char* url);
+void DownloadProcess(const char* url, ultralight::RefPtr<ultralight::View> view, const char* exePath, HWND hwnd);
 void CenterWindow();
 LRESULT CALLBACK HookCallback(int nCode, WPARAM wParam, LPARAM lParam);
+
+JSValueRef Message(JSContextRef ctx, JSObjectRef function,
+  JSObjectRef thisObject, size_t argumentCount, const JSValueRef arguments[],
+  JSValueRef* exception);
